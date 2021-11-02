@@ -1,0 +1,30 @@
+{
+  "directory": "data/miplib2017",
+  "methods": [
+    {
+      "name": "gurobi_simplex",
+      "solution_dir": "grb_sol_simplex",
+      "affix": ".json"
+    },
+    {
+      "name": "gurobi_dual",
+      "solution_dir": "grb_sol_dual",
+      "affix": ".json"
+    },
+    {
+      "name": "gurobi_barrier",
+      "solution_dir": "grb_sol_barrier",
+      "affix": ".json"
+    },
+    {
+      "name": "google_pdhg_1e-8",
+      "solution_dir": "pdhg_sol_1e-8",
+      "affix": "summary.json"
+    },
+    {
+      "name": "google_pdhg_1e-6",
+      "solution_dir": "pdhg_sol_1e-6",
+      "affix": "summary.json"
+    }
+  ]
+}
