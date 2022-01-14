@@ -12,10 +12,12 @@ if os.path.isdir(input_dir):
   print(f"running {len(in_files)} models")
 
   for i in in_files:
-    m = gurobipy.read(i)
-    m1 = m.relax().presolve()
-    m1.write(f"{output_dir}/pre_{i}")
-
+    try:
+      m = gurobipy.read(f"{input_dir}/{i}")
+      m1 = m.relax().presolve()
+      m1.write(f"{output_dir}/pre_{i}")
+    except:
+      print(f"failed at {i}")
 else:
   i = input_dir
   m = gurobipy.read(i)

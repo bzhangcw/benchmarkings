@@ -1,5 +1,5 @@
 # params
-pdhgsrc=/Users/brent/workspace/google-first-order-lp
+pdhgsrc=$HOME/workspace/google-first-order-lp
 # test set
 set=$1
 timelimit=$2
@@ -15,7 +15,7 @@ phdg8=$set/pdhg_sol_1e-8
 
 # google-pdhg
 # 1e-8
-julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
+nohup julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
   --time_sec_limit $timelimit \
   --method pdhg \
   --output_dir $phdg8 \
@@ -25,7 +25,7 @@ julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
 
 # 1e-6
 
-julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
+nohup julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
   --time_sec_limit $timelimit \
   --relative_optimality_tol 1e-5 --eps_primal_infeasible 1e-6 --eps_dual_infeasible 1e-6 \
   --method pdhg \
