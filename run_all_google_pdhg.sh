@@ -42,8 +42,6 @@ nohup julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
   --instance_path $set/$prefix &>$set/pdhg.1e-8.log &
 
 # 1e-6
-julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
-
 nohup julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
   --time_sec_limit $timelimit \
   --relative_optimality_tol 1e-6 --eps_primal_infeasible 1e-6 --eps_dual_infeasible 1e-6 \
