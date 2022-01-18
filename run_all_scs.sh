@@ -48,7 +48,7 @@ for f in $(/bin/ls $set/$prefix); do
     --iteration_limit $iterlimit \
     --output_dir $scs8 \
     --tolerance 1e-8 \
-    --instance_path $set/$prefix/$f &>>$logfile &
+    --instance_path $set/$prefix/$f &>>$logfile
 done
 # 1e-6
 logfile=$set/scs.1e-6.log
@@ -63,5 +63,5 @@ for f in $(/bin/ls $set/$prefix); do
     --iteration_limit $iterlimit \
     --output_dir $scs6 \
     --tolerance 1e-6 \
-    --instance_path $set/$prefix/$f &>>$logfile &
+    --instance_path $set/$prefix/$f &>>$logfile
 done
