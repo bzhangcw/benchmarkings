@@ -32,7 +32,7 @@ mkdir -p $phdg8
 
 # google-pdhg
 # 1e-8
-julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
+nohup julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
   --time_sec_limit $timelimit \
   --relative_optimality_tol 1e-8 --eps_primal_infeasible 1e-8 --eps_dual_infeasible 1e-8 \
   --method pdhg \
@@ -43,6 +43,8 @@ julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
 
 # 1e-6
 julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
+
+nohup julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
   --time_sec_limit $timelimit \
   --relative_optimality_tol 1e-6 --eps_primal_infeasible 1e-6 --eps_dual_infeasible 1e-6 \
   --method pdhg \
