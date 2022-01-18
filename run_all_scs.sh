@@ -36,7 +36,10 @@ mkdir -p $scs8
 # 1e-8
 # todo, scs how to set timelimit?
 # it is unable to do so, then you can only controll time limits outside.
-rm $set/scs.1e-8.log
+logfile=$set/scs.1e-8.log
+if [ -f $logfile ]; then
+  rm $logfile
+fi
 for f in $(/bin/ls $set/$prefix); do
   nohup timeout $timelimit julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_lp_external.jl \
     --solver scs-indirect \
@@ -45,10 +48,13 @@ for f in $(/bin/ls $set/$prefix); do
     --iteration_limit $iterlimit \
     --output_dir $scs8 \
     --tolerance 1e-8 \
-    --instance_path $set/$prefix/$f &>>$set/scs.1e-8.log &
+    --instance_path $set/$prefix/$f &>>$logfile &
 done
 # 1e-6
-rm $set/scs.1e-6.log
+logfile=$set/scs.1e-6.log
+if [ -f $logfile ]; then
+  rm $logfile
+fi
 for f in $(/bin/ls $set/$prefix); do
   nohup timeout $timelimit julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_lp_external.jl \
     --solver scs-indirect \
@@ -57,5 +63,5 @@ for f in $(/bin/ls $set/$prefix); do
     --iteration_limit $iterlimit \
     --output_dir $scs6 \
     --tolerance 1e-6 \
-    --instance_path $set/$prefix/$f &>>$set/scs.1e-6.log &
+    --instance_path $set/$prefix/$f &>>$logfile &
 done
