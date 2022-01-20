@@ -1,0 +1,25 @@
+{
+  "directory": "data/netlib",
+  "methods": [
+    {
+      "name": "google_pdhg_1e-8",
+      "solution_dir": "pdhg_sol_1e-8",
+      "affix": "summary.json"
+    },
+    {
+      "name": "google_pdhg_1e-6",
+      "solution_dir": "pdhg_sol_1e-6",
+      "affix": "summary.json"
+    },
+    {
+      "name": "scs-indirect_1e-6",
+      "solution_dir": "scs_sol_1e-6",
+      "affix": "summary.json"
+    },
+    {
+      "name": "scs-indirect_1e-8",
+      "solution_dir": "scs_sol_1e-8",
+      "affix": "summary.json"
+    }
+  ]
+}

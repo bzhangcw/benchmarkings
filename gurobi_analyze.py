@@ -1,6 +1,5 @@
 import json
 import pandas as pd
-from gurobipy import *
 
 
 def gurobi_string_to_result(fpath):
@@ -12,10 +11,10 @@ def gurobi_string_to_result(fpath):
     res_dual = 0
     sol_time = float(info['Runtime'])
     status = info['Status']
-    if status != GRB.Status.INFEASIBLE:
+    if status != 3:
       val_primal = float(info['ObjVal'])
       val_dual = float(info['ObjVal'])
-      sol_status = 'OPTIMAL' if status == GRB.Status.OPTIMAL else "UNFINISHED"
+      sol_status = 'OPTIMAL' if status == 2 else "UNFINISHED"
     else:
       sol_status = "INFEASIBLE"
       val_primal = -1e6
@@ -35,3 +34,4 @@ if __name__ == '__main__':
   result = gurobi_string_to_result(
     "../miplib2017-bench/grb_sol/pre_wachplan.json")
   print(result)
+
