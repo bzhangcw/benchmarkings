@@ -14,7 +14,8 @@ def google_pdhg_string_to_result(fpath):
     val_primal = stats_conv['primal_objective']
     val_dual = stats_conv['primal_objective']
     name = content['instance_name']
-    return dict(res_primal=res_primal.__round__(8),
+    return dict(iteration_num=stats_solution['iteration_number'],
+                res_primal=res_primal.__round__(8),
                 res_dual=res_dual.__round__(8),
                 sol_time=sol_time.__round__(4),
                 val_primal=val_primal.__round__(4),
