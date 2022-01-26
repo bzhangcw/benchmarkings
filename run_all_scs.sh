@@ -40,16 +40,17 @@ logfile=$set/scs.1e-8.log
 if [ -f $logfile ]; then
   rm $logfile
 fi
-for f in $(/bin/ls $set/$prefix); do
-  nohup timeout $timelimit julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_lp_external.jl \
-    --solver scs-indirect \
-    --verbose true \
-    --print_stdout true \
-    --iteration_limit $iterlimit \
-    --output_dir $scs8 \
-    --tolerance 1e-8 \
-    --instance_path $set/$prefix/$f &>>$logfile
-done
+# no need to run scs at 1e-8
+# for f in $(/bin/ls $set/$prefix); do
+#  nohup timeout $timelimit julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_lp_external.jl \
+#    --solver scs-indirect \
+#    --verbose true \
+#    --print_stdout true \
+#    --iteration_limit $iterlimit \
+#    --output_dir $scs8 \
+#    --tolerance 1e-8 \
+#    --instance_path $set/$prefix/$f &>>$logfile
+# done
 # 1e-6
 logfile=$set/scs.1e-6.log
 if [ -f $logfile ]; then

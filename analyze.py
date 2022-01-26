@@ -47,6 +47,7 @@ def analyze(fpath=DEFAULT_CONF):
     logger.info(f"try {m}")
     if not os.path.exists(solution_path):
       logger.info(f"method {m} does not exist")
+      continue
     logger.info(f"analyze {m} @ {solution_path}") 
     for _fp in os.listdir(solution_path):
       fp = os.path.join(solution_path, _fp)
