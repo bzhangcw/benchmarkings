@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def gurobi_string_to_result(fpath):
-  name = fpath.split('/')[-1].split('.')[0]
+  name = fpath.split("/")[-1].replace('.mps', '').replace('.gz', '')
   with open(fpath, 'r') as f:
     content = json.load(f)
     info = content['SolutionInfo']

@@ -5,7 +5,7 @@
 #  * Copyright (c) 2022
 #  */
 
-if [ "$#" -ne 4 ]; then
+if [ "$#" -ne 6 ]; then
   echo "Script for running SCS via Julia in batch mode..."
   echo "SCS is invoked via JuMP by the scripts provided in PDLP (google/FirstOrderLP"
   echo "Usage: <dataset directory> <subset name> <time limit for each instance> <iterlimit>" 1>&2
@@ -25,44 +25,30 @@ set=$1
 prefix=$2
 timelimit=$3
 iterlimit=$4
+precision=$5
+method=$6
 
-scs6=$set/scs_sol_1e-6
-scs8=$set/scs_sol_1e-8
+scs6=$set/scs_${method}_sol_1e-$precision
 
 mkdir -p $scs6
-mkdir -p $scs8
 
 # google-pdhg
 # 1e-8
 # todo, scs how to set timelimit?
 # it is unable to do so, then you can only controll time limits outside.
-logfile=$set/scs.1e-8.log
+logfile=$set/scs_${method}_sol_1e-$precision.log
 if [ -f $logfile ]; then
   rm $logfile
 fi
+
 # no need to run scs at 1e-8
-# for f in $(/bin/ls $set/$prefix); do
-#  nohup timeout $timelimit julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_lp_external.jl \
-#    --solver scs-indirect \
-#    --verbose true \
-#    --print_stdout true \
-#    --iteration_limit $iterlimit \
-#    --output_dir $scs8 \
-#    --tolerance 1e-8 \
-#    --instance_path $set/$prefix/$f &>>$logfile
-# done
-# 1e-6
-logfile=$set/scs.1e-6.log
-if [ -f $logfile ]; then
-  rm $logfile
-fi
 for f in $(/bin/ls $set/$prefix); do
   nohup timeout $timelimit julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_lp_external.jl \
-    --solver scs-indirect \
+    --solver scs-$method \
     --verbose true \
     --print_stdout true \
     --iteration_limit $iterlimit \
     --output_dir $scs6 \
-    --tolerance 1e-6 \
+    --tolerance 1e-$precision \
     --instance_path $set/$prefix/$f &>>$logfile
 done

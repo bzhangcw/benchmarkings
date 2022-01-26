@@ -12,6 +12,7 @@ import pandas as pd
 from google_pdhg_analyze import google_pdhg_string_to_result
 from gurobi_analyze import gurobi_string_to_result
 from scs_analyze import scs_string_to_result
+from abip_analyze import abip_string_to_result
 
 DEFAULT_CONF = "./conf.analyze.json"
 ANALYZE_METHOD_REGISTRY = {
@@ -20,10 +21,15 @@ ANALYZE_METHOD_REGISTRY = {
   "gurobi_barrier": gurobi_string_to_result,
   "google_pdhg_1e-6": google_pdhg_string_to_result,
   "google_pdhg_1e-8": google_pdhg_string_to_result,
-  "scs-indirect_1e-8": scs_string_to_result,
   "scs-indirect_1e-6": scs_string_to_result,
-  "scs-direct_1e-8": scs_string_to_result,
-  "scs-direct_1e-6": scs_string_to_result
+  "scs-direct_1e-6": scs_string_to_result,
+  "abip_1e-4": abip_string_to_result,
+  "abip_1e-6": abip_string_to_result,
+  ###########################
+  # precision not achievable
+  ###########################
+  # "scs-indirect_1e-8": scs_string_to_result,
+  # "scs-direct_1e-8": scs_string_to_result,
 }
 
 FORMAT = '%(asctime)s %(name)s %(message)s'
@@ -48,7 +54,7 @@ def analyze(fpath=DEFAULT_CONF):
     if not os.path.exists(solution_path):
       logger.info(f"method {m} does not exist")
       continue
-    logger.info(f"analyze {m} @ {solution_path}") 
+    logger.info(f"analyze {m} @ {solution_path}")
     for _fp in os.listdir(solution_path):
       fp = os.path.join(solution_path, _fp)
       if not fp.endswith(affix):
@@ -75,4 +81,3 @@ if __name__ == '__main__':
   parser.add_argument("--conf", type=str)
   args = parser.parse_args()
   analyze(args.conf)
-
