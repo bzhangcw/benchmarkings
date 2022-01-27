@@ -32,10 +32,10 @@ def abip_string_to_result(fpath):
     name = content['name']
     return dict(iteration_num=content['admm_iter'],
                 ipm_num=content['ipm_iter'],
-                res_primal=res_primal.__round__(8),
-                res_dual=res_dual.__round__(8),
-                sol_time=sol_time.__round__(4),
-                val_primal=val_primal.__round__(4),
-                val_dual=val_dual.__round__(4),
+                res_primal=res_primal,
+                res_dual=res_dual,
+                sol_time=sol_time,
+                val_primal=val_primal,
+                val_dual=val_dual,
                 sol_status=sol_status,
                 name=name)

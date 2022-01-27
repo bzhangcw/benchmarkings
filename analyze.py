@@ -20,6 +20,7 @@ ANALYZE_METHOD_REGISTRY = {
   "gurobi_dual": gurobi_string_to_result,
   "gurobi_barrier": gurobi_string_to_result,
   "google_pdhg_1e-6": google_pdhg_string_to_result,
+  "google_pdhg_1e-4": google_pdhg_string_to_result,
   "google_pdhg_1e-8": google_pdhg_string_to_result,
   "scs-indirect_1e-6": scs_string_to_result,
   "scs-direct_1e-6": scs_string_to_result,

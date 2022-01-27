@@ -25,6 +25,16 @@
       "name": "google_pdhg_1e-6",
       "solution_dir": "pdhg_sol_1e-6",
       "affix": "summary.json"
+    },
+    {
+      "name": "abip_1e-4",
+      "solution_dir": "abip_1e-4",
+      "affix": ".json"
+    },
+    {
+      "name": "abip_1e-6",
+      "solution_dir": "abip_1e-6",
+      "affix": ".json"
     }
   ]
 }
