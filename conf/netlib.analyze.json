@@ -3,6 +3,11 @@
   "methods": [
     {
       "name": "google_pdhg_1e-4",
+      "solution_dir": "pdhg_sol_1e-4",
+      "affix": "summary.json"
+    },
+    {
+      "name": "google_pdhg_1e-6",
       "solution_dir": "pdhg_sol_1e-6",
       "affix": "summary.json"
     },
@@ -12,14 +17,44 @@
       "affix": "summary.json"
     },
     {
-      "name": "scs-indirect_1e-4",
-      "solution_dir": "scs_sol_1e-8",
+      "name": "scs_indirect_1e-4",
+      "solution_dir": "scs_indirect_sol_1e-4",
       "affix": "summary.json"
     },
     {
-      "name": "scs-indirect_1e-6",
-      "solution_dir": "scs_sol_1e-6",
+      "name": "scs_indirect_1e-6",
+      "solution_dir": "scs_indirect_sol_1e-6",
       "affix": "summary.json"
+    },
+    {
+      "name": "scs_direct_1e-4",
+      "solution_dir": "scs_direct_sol_1e-4",
+      "affix": "summary.json"
+    },
+    {
+      "name": "scs_direct_1e-6",
+      "solution_dir": "scs_direct_sol_1e-6",
+      "affix": "summary.json"
+    },
+    {
+      "name": "abip_direct_1e-4",
+      "solution_dir": "abip_1_1e-4",
+      "affix": ".json"
+    },
+    {
+      "name": "abip_direct_1e-6",
+      "solution_dir": "abip_1_1e-6",
+      "affix": ".json"
+    },
+    {
+      "name": "abip_indirect_1e-4",
+      "solution_dir": "abip_0_1e-4",
+      "affix": ".json"
+    },
+    {
+      "name": "abip_indirect_1e-6",
+      "solution_dir": "abip_0_1e-6",
+      "affix": ".json"
     }
   ]
 }

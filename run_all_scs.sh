@@ -43,12 +43,15 @@ fi
 
 # no need to run scs at 1e-8
 for f in $(/bin/ls $set/$prefix); do
-  nohup timeout $timelimit julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_lp_external.jl \
+  #  echo $f
+  cmd="timeout $timelimit julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_lp_external.jl \
     --solver scs-$method \
     --verbose true \
     --print_stdout true \
     --iteration_limit $iterlimit \
     --output_dir $scs6 \
     --tolerance 1e-$precision \
-    --instance_path $set/$prefix/$f &>>$logfile
+    --instance_path $set/$prefix/$f &>>$logfile"
+  echo $cmd &>>$logfile
+  eval $cmd
 done
