@@ -88,7 +88,7 @@ You may also use your own names.
 ln -s <the path to FirstOrderLp.jl> google-pdlp
 ```
 
-See [`run_all_google_pdhg.sh`](./run_all_google_pdhg.sh) to run batch tests. An example invocation,
+See [`run_all_google_pdhg.sh`](misc/run_all_google_pdhg.sh) to run batch tests. An example invocation,
 
 ```
 zsh run_all_google_pdhg.sh -h

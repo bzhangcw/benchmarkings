@@ -8,7 +8,7 @@
 if [ "$#" -ne 6 ]; then
   echo "Script for running SCS via Julia in batch mode..."
   echo "SCS is invoked via JuMP by the scripts provided in PDLP (google/FirstOrderLP"
-  echo "Usage: <dataset directory> <subset name> <time limit for each instance> <iterlimit>" 1>&2
+  echo "Usage: <dataset directory> <subset name> <time limit for each instance> <iterlimit> <precision> <method>" 1>&2
   exit -1
 fi
 

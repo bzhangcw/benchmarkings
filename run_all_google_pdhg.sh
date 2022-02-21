@@ -5,9 +5,9 @@
 #  * Copyright (c) 2022
 #  */
 
-if [ "$#" -ne 3 ]; then
+if [ "$#" -ne 4 ]; then
   echo "Script for running Google PDLP in batch mode..."
-  echo "Usage: <dataset directory> <subset name> <time limit for each instance>" 1>&2
+  echo "Usage: <dataset directory> <subset name> <time limit for each instance> <eps>" 1>&2
   exit -1
 fi
 
@@ -23,30 +23,19 @@ fi
 set=$1
 prefix=$2
 timelimit=$3
+precision=$4
+eps=1e-$precision
 
-phdg6=$set/pdhg_sol_1e-6
-phdg8=$set/pdhg_sol_1e-8
+name=pdhg_1e-${precision}
+phdg6=$set/pdhg_sol_1e-${precision}
 
 mkdir -p $phdg6
-mkdir -p $phdg8
 
-# google-pdhg
-# 1e-8
 nohup julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
   --time_sec_limit $timelimit \
-  --relative_optimality_tol 1e-8 --eps_primal_infeasible 1e-8 --eps_dual_infeasible 1e-8 \
-  --method pdhg \
-  --output_dir $phdg8 \
-  --verbosity 4 \
-  --redirect_stdio true \
-  --instance_path $set/$prefix &>$set/pdhg.1e-8.log &
-
-# 1e-6
-nohup julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
-  --time_sec_limit $timelimit \
-  --relative_optimality_tol 1e-6 --eps_primal_infeasible 1e-6 --eps_dual_infeasible 1e-6 \
+  --relative_optimality_tol $eps --eps_primal_infeasible $eps --eps_dual_infeasible $eps \
   --method pdhg \
   --output_dir $phdg6 \
   --verbosity 4 \
   --redirect_stdio true \
-  --instance_path $set/$prefix &>$set/pdhg.1e-6.log &
+  --instance_path $set/$prefix &>$set/$name.log &

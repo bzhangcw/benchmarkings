@@ -12,6 +12,7 @@ if [ "$#" -ne 5 ]; then
 fi
 
 # params
+wdir=$(pwd)
 abipsrc=abip-lp
 
 if [ ! -d $abipsrc ]; then
@@ -28,7 +29,7 @@ iterlimit=$4
 precision=$5
 
 abipname=$set/abip_1e-$precision
-logfile=$abipname.log
+logfile=$abipname.$prefix.log
 
 mkdir -p $abipname
 
@@ -36,10 +37,11 @@ if [ -f $logfile ]; then
   rm $logfile
 fi
 # test_batch_func(fdir, fodir, max_iter, eps)
-for f in $(/bin/ls $set/$prefix); do
-  ff=$set/$prefix/$f
+cd $wdir/$abipsrc
+for f in $(/bin/ls $set/$prefix/*.mps); do
+  ff=$f
   echo "running $ff" &>>$logfile
-  mat_cmd="cd $abipsrc; addpath test; test_batch_func('$ff', '$abipname', $iterlimit, 1e-$precision)"
+  mat_cmd="addpath test; test_batch_func('$ff', '$abipname', $iterlimit, 1e-$precision); exit;"
   echo $mat_cmd &>>$logfile
   nohup timeout $timelimit \
     $MATLAB_HOME/matlab -nodesktop -nosplash -noFigureWindows -r \

@@ -9,10 +9,10 @@ import time
 
 import pandas as pd
 
-from google_pdhg_analyze import google_pdhg_string_to_result
-from gurobi_analyze import gurobi_string_to_result
-from scs_analyze import scs_string_to_result
-from abip_analyze import abip_string_to_result
+from analyze_google_pdhg import google_pdhg_string_to_result
+from analyze_gurobi import gurobi_string_to_result
+from analyze_scs import scs_string_to_result
+from analyze_abip import abip_string_to_result
 
 DEFAULT_CONF = "./conf.analyze.json"
 ANALYZE_METHOD_REGISTRY = {
@@ -22,7 +22,9 @@ ANALYZE_METHOD_REGISTRY = {
   "google_pdhg_1e-6": google_pdhg_string_to_result,
   "google_pdhg_1e-4": google_pdhg_string_to_result,
   "google_pdhg_1e-8": google_pdhg_string_to_result,
+  "scs-indirect_1e-4": scs_string_to_result,
   "scs-indirect_1e-6": scs_string_to_result,
+  "scs-direct_1e-4": scs_string_to_result,
   "scs-direct_1e-6": scs_string_to_result,
   "abip_1e-4": abip_string_to_result,
   "abip_1e-6": abip_string_to_result,
@@ -70,7 +72,13 @@ def analyze(fpath=DEFAULT_CONF):
     dfs.append(df)
     logger.info(f"{name} solution finished")
   df_agg = pd.concat(dfs)
-
+  instances = df_agg['name'].unique()
+  method_names = [n['name'] for n in config['methods']]
+  index = pd.MultiIndex.from_tuples(
+    list((m, i) for m in method_names for i in instances.tolist()),
+    names=('method', 'name')
+  )
+  df_agg = df_agg.set_index(['method', 'name']).reindex(index, fill_value='-')
   result_file = f"result_{int(time.time())}.xlsx"
   df_agg.to_excel(result_file)
   logger.info(f"analyze finished to file {result_file}")
@@ -78,6 +86,7 @@ def analyze(fpath=DEFAULT_CONF):
 
 if __name__ == '__main__':
   import argparse
+  
   parser = argparse.ArgumentParser()
   parser.add_argument("--conf", type=str)
   args = parser.parse_args()
