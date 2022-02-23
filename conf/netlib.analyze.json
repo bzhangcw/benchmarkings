@@ -2,6 +2,11 @@
   "directory": "data/netlib",
   "methods": [
     {
+      "name": "gurobi_barrier",
+      "solution_dir": "grb_sol_barrier",
+      "affix": ".json"
+    },
+    {
       "name": "google_pdhg_1e-4",
       "solution_dir": "pdhg_sol_1e-4",
       "affix": "summary.json"

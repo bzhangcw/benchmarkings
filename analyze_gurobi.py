@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def gurobi_string_to_result(fpath):
-  name = fpath.split("/")[-1].replace('.mps', '').replace('.gz', '')
+  name = fpath.split("/")[-1].replace('.mps', '').replace('.gz', '').replace('.json', '')
   with open(fpath, 'r') as f:
     content = json.load(f)
     info = content['SolutionInfo']
@@ -11,6 +11,7 @@ def gurobi_string_to_result(fpath):
     res_dual = 0
     sol_time = float(info['Runtime'])
     status = info['Status']
+    ipm_num = info.get("BarIterCount", 0)
     if status != 3:
       val_primal = float(info['ObjVal'])
       val_dual = float(info['ObjVal'])
@@ -26,6 +27,7 @@ def gurobi_string_to_result(fpath):
                 val_primal=val_primal.__round__(4),
                 val_dual=val_dual.__round__(4),
                 sol_status=sol_status,
+                ipm_num=ipm_num,
                 name=name)
 
 

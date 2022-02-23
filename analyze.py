@@ -88,8 +88,14 @@ def analyze(fpath=DEFAULT_CONF):
     list((i, m) for m in method_names for i in instances.tolist()),
     names=('name', 'method')
   )
-  df_agg = df_agg.set_index(['name', 'method']).reindex(index, fill_value='-').reset_index(drop=False).sort_values(
+  df_agg = df_agg.set_index(
     ['name', 'method']
+  ).reindex(
+    index, fill_value='-'
+  ).reset_index(drop=False).sort_values(
+    ['name', 'method']
+  ).assign(
+    real_name=lambda df: df['name'].apply(lambda x: x.replace('pre_', ''))
   )
   result_file = f"result_{int(time.time())}.xlsx"
   df_agg.to_excel(result_file, index=False)
