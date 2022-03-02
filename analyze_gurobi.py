@@ -12,6 +12,8 @@ def gurobi_string_to_result(fpath):
     sol_time = float(info['Runtime'])
     status = info['Status']
     ipm_num = info.get("BarIterCount", 0)
+    iter_num = info.get("IterCount", 0)
+    
     if status != 3:
       val_primal = float(info['ObjVal'])
       val_dual = float(info['ObjVal'])
@@ -28,6 +30,7 @@ def gurobi_string_to_result(fpath):
                 val_dual=val_dual.__round__(4),
                 sol_status=sol_status,
                 ipm_num=ipm_num,
+                iteration_num=iter_num,
                 name=name)
 
 

@@ -40,7 +40,7 @@ if [ -f $logfile ]; then
 fi
 # test_batch_func(fdir, fodir, max_iter, eps)
 cd $wdir/$abipsrc
-for f in $(/bin/ls $set/$prefix/*.mps); do
+for f in $(/bin/ls $set/$prefix/*.mps.gz); do
   ff=$f
   echo "running $ff" &>>$logfile
   mat_cmd="addpath test; test_batch_func('$ff', '$abipname', $iterlimit, 1e-$precision, $method, $presolve); exit;"

@@ -1,5 +1,5 @@
 {
-  "directory": "data/mip17col",
+  "directory": "data/miplib2017-collection",
   "methods": [
     {
       "name": "gurobi_simplex",

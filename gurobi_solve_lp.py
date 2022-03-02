@@ -19,7 +19,7 @@ if os.path.isdir(input_dir):
       m.read(param_file)
       m1 = m.relax()
       m1.optimize()
-      name = i.split("/")[-1].split(".")[0]
+      name = i.split("/")[-1].replace('.mps', '').replace('.gz', '').replace('.json', '')
       m1.write(f"{output_dir}/{name}.json")
     except Exception as e:
       print(e.message)
@@ -31,7 +31,7 @@ else:
     m.read(param_file)
     m1 = m.relax()
     m1.optimize()
-    name = i.split("/")[-1].split(".")[0]
+    name = i.split("/")[-1].replace('.mps', '').replace('.gz', '').replace('.json', '')
     m1.write(f"{output_dir}/{name}.json")
   except Exception as e:
     print(e.message)

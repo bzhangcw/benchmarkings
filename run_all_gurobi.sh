@@ -5,9 +5,9 @@ dual=$set/grb_sol_dual
 barrier=$set/grb_sol_barrier
 
 # clean
-mkdir -pv $simplex && mkdir $simplex
-mkdir -pv $dual && mkdir $dual
-mkdir -pv $barrier && mkdir $barrier
+mkdir -p $simplex
+mkdir -p $dual
+mkdir -p $barrier
 
 # gurobi
 # python gurobi_solve_lp.py $set/grb_presolved $simplex ./gurobi.simplex.prm &>$set/grb.simplex.log &
