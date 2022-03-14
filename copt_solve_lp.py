@@ -36,7 +36,7 @@ if os.path.isdir(input_dir):
       content['name'] = name
       content['Status'] = m.LpStatus
       content['ObjVal'] = m.objval
-      content['IterCount'] = 0
+      content['IterCount'] = m.IterCount
       m.write(f"{output_dir}/{name}.json")
     except Exception as e:
       print(e.message)
