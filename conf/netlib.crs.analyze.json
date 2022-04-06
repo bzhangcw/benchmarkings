@@ -1,0 +1,25 @@
+{
+  "directory": "data/netlib",
+  "methods": [
+    {
+      "name": "google_pdhg_1e-4",
+      "solution_dir": "crs.pdhg_sol_1e-4",
+      "affix": ".json"
+    },
+    {
+      "name": "google_pdhg_1e-6",
+      "solution_dir": "crs.pdhg_sol_1e-6",
+      "affix": ".json"
+    },
+    {
+      "name": "google_pdhg_1e-8",
+      "solution_dir": "crs.pdhg_sol_1e-8",
+      "affix": ".json"
+    },
+    {
+      "name": "abip_direct_1e-6",
+      "solution_dir": "crs.abip_1_1e-6",
+      "affix": ".json"
+    }
+  ]
+}

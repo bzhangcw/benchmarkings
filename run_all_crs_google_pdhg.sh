@@ -14,7 +14,7 @@ result=$set/pdhg_sol_1e-${precision}
 cross=$set/crs.pdhg_sol_1e-${precision}
 
 # crossover
-crs_script=src/crossover_by_copt.py
+crs_script=crossover_by_copt.py
 
 mkdir -p $cross
 

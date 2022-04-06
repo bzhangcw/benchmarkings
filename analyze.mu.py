@@ -9,35 +9,9 @@ import time
 
 import pandas as pd
 
-from analyze_google_pdhg import google_pdhg_string_to_result
-from analyze_gurobi import gurobi_string_to_result
-from analyze_scs import scs_string_to_result
 from analyze_abip import abip_string_to_result
-from analyze_copt import copt_string_to_result
 
 DEFAULT_CONF = "./conf.analyze.json"
-ANALYZE_METHOD_REGISTRY = {
-    "gurobi_simplex": gurobi_string_to_result,
-    "gurobi_dual": gurobi_string_to_result,
-    "gurobi_barrier": gurobi_string_to_result,
-    "google_pdhg_1e-6": google_pdhg_string_to_result,
-    "google_pdhg_1e-4": google_pdhg_string_to_result,
-    "google_pdhg_1e-8": google_pdhg_string_to_result,
-    "scs_indirect_1e-4": scs_string_to_result,
-    "scs_indirect_1e-6": scs_string_to_result,
-    "scs_direct_1e-4": scs_string_to_result,
-    "scs_direct_1e-6": scs_string_to_result,
-    "abip_direct_1e-4": abip_string_to_result,
-    "abip_indirect_1e-4": abip_string_to_result,
-    "abip_direct_1e-6": abip_string_to_result,
-    "abip_indirect_1e-6": abip_string_to_result,
-    "copt_barrier": copt_string_to_result,
-    ###########################
-    # precision not achievable
-    ###########################
-    # "scs_indirect_1e-8": scs_string_to_result,
-    # "scs_direct_1e-8": scs_string_to_result,
-}
 
 FORMAT = '%(asctime)s %(levelname)s %(name)s %(message)s'
 logging.basicConfig(format=FORMAT, level=logging.DEBUG)
@@ -54,7 +28,7 @@ def analyze(fpath=DEFAULT_CONF):
     for m in config['methods']:
         name = m['name']
         affix = m['affix']
-        func = ANALYZE_METHOD_REGISTRY[name]
+        func = abip_string_to_result
         solution_path = os.path.join(instance_path, m['solution_dir'])
         results = []
         logger.debug(f"try {m}")

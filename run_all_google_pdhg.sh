@@ -31,11 +31,14 @@ phdg6=$set/pdhg_sol_1e-${precision}
 
 mkdir -p $phdg6
 
-nohup julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
+cmd="nohup julia --project=$pdhgsrc/scripts $pdhgsrc/scripts/solve_qp.jl \
   --time_sec_limit $timelimit \
   --relative_optimality_tol $eps --eps_primal_infeasible $eps --eps_dual_infeasible $eps \
   --method pdhg \
   --output_dir $phdg6 \
   --verbosity 4 \
   --redirect_stdio true \
-  --instance_path $set/$prefix &>$set/$name.log &
+  --instance_path $set/$prefix &>$set/$name.log &"
+echo $cmd
+eval $cmd
+

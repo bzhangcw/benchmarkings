@@ -10,16 +10,16 @@ set=$1
 prefix=$2
 timelimit=$3
 precision=$4
-presolve=$5
+method=$5
 result=$set/abip_${method}_1e-$precision
 cross=$set/crs.abip_${method}_1e-$precision
 
 # crossover
-crs_script=src/crossover_by_copt.py
+crs_script=crossover_by_copt.py
 
 mkdir -p $cross
 
-logfile=$set/crs.pdhg_sol_1e-$precision.log
+logfile=$set/crs.abip_1e-$precision.log
 if [ -f $logfile ]; then
   rm $logfile
 fi
@@ -29,8 +29,8 @@ for f in $(/bin/ls $set/$prefix); do
 
   ff=$(basename -s .mps.gz $f)
   echo $ff >>$logfile
-  primal=$result/${f}_primal.txt
-  dual=$result/${f}_dual.txt
+  primal=$result/${f}.primal.txt
+  dual=$result/${f}.dual.txt
   cmd="timeout $timelimit python $crs_script $set/$prefix/$f $primal $dual $cross &>>$logfile"
   echo $cmd &>>$logfile
   eval $cmd

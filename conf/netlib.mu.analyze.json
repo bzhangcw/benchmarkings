@@ -1,0 +1,15 @@
+{
+  "directory": "data/netlib",
+  "methods": [
+    {
+      "name": "abip_direct-1e-6",
+      "solution_dir": "abip_1_1e-6",
+      "affix": ".json"
+    },
+    {
+      "name": "abip-mu_1e-6",
+      "solution_dir": "abip-gwz_1_1e-6",
+      "affix": ".json"
+    }
+  ]
+}

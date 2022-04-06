@@ -12,6 +12,14 @@
 #  "BarIterCount": 0
 #  }
 #
+# PrimalInfMax        The maximal primal infeasibility
+# PrimalInfSum        The sum of primal infeasibility
+# DualInfMax          The maximal dual infeasibility
+# DualInfSum          The sum of dual infeasibility
+#
+# PrimalInf           Number of infeasible variables in the solution
+# DualInf             Number of dual infeasible variables in the solution
+import json
 
 import coptpy
 import os
@@ -30,14 +38,19 @@ if os.path.isdir(input_dir):
       env = coptpy.Envr()
       m = env.createModel()
       m.read(f"{input_dir}/{i}")
-      m.read(param_file)
+      m.readParam(param_file)
       m.solveLP()
       name = i.split("/")[-1].replace('.mps', '').replace('.gz', '')
       content['name'] = name
       content['Status'] = m.LpStatus
       content['ObjVal'] = m.objval
-      content['IterCount'] = m.IterCount
-      m.write(f"{output_dir}/{name}.json")
+      content['BarrierIter'] = m.BarrierIter
+      content['SimplexIter'] = m.SimplexIter
+      content['PrimalRes'] = m.PrimalInfMax
+      content['DualRes'] = m.DualInfMax
+      content['Runtime'] = m.SolvingTime
+      json.dump(content, open(f"{output_dir}/{name}.json", 'w'))
+      print(m.getParam("LpMethod"))
     except Exception as e:
       print(e.message)
       print(f"---- {name} --- failed ")
@@ -45,12 +58,22 @@ else:
   i = input_dir
   content = {}
   try:
-    m = coptpy.read(f"{i}")
+    env = coptpy.Envr()
+    m = env.createModel()
+    m.read(f"{i}")
     m.read(param_file)
-    m1 = m.relax()
-    m1.optimize()
+    m.solveLP()
     name = i.split("/")[-1].split(".")[0]
-    m1.write(f"{output_dir}/{name}.json")
+    content = {}
+    content['name'] = name
+    content['Status'] = m.LpStatus
+    content['ObjVal'] = m.objval
+    content['BarrierIter'] = m.BarrierIter
+    content['SimplexIter'] = m.SimplexIter
+    content['PrimalRes'] = m.PrimalInfMax
+    content['DualRes'] = m.DualInfMax
+    content['Runtime'] = m.SolvingTime
+    json.dump(content, open(f"{output_dir}/{name}.json", 'w'))
   except Exception as e:
     print(e.message)
     print(f"---- {name} --- failed ")

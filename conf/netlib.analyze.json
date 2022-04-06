@@ -7,6 +7,11 @@
       "affix": ".json"
     },
     {
+      "name": "copt_barrier",
+      "solution_dir": "copt_sol_barrier",
+      "affix": ".json"
+    },
+    {
       "name": "google_pdhg_1e-4",
       "solution_dir": "pdhg_sol_1e-4",
       "affix": "summary.json"
