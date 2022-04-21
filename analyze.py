@@ -20,6 +20,7 @@ ANALYZE_METHOD_REGISTRY = {
     "gurobi_simplex": gurobi_string_to_result,
     "gurobi_dual": gurobi_string_to_result,
     "gurobi_barrier": gurobi_string_to_result,
+    "pdlp_julia": google_pdhg_string_to_result,
     "google_pdhg_1e-6": google_pdhg_string_to_result,
     "google_pdhg_1e-4": google_pdhg_string_to_result,
     "google_pdhg_1e-8": google_pdhg_string_to_result,
@@ -54,7 +55,8 @@ def analyze(fpath=DEFAULT_CONF):
     for m in config['methods']:
         name = m['name']
         affix = m['affix']
-        func = ANALYZE_METHOD_REGISTRY[name]
+        funcname = m.get('funcname', "")
+        func = ANALYZE_METHOD_REGISTRY[name] if name in ANALYZE_METHOD_REGISTRY else ANALYZE_METHOD_REGISTRY[funcname]
         solution_path = os.path.join(instance_path, m['solution_dir'])
         results = []
         logger.debug(f"try {m}")
@@ -122,7 +124,8 @@ if __name__ == '__main__':
     df_agg_pre = df_agg_pre.assign(
         bool_fail=lambda df: df.sol_status.apply(bool_fail)
     )
-    df_agg_pre.to_excel(f"result_{result_stamp}.{args.prefix}.xlsx", index=False)
+    if args.prefix.__len__() > 0:
+        df_agg_pre.to_excel(f"result_{result_stamp}.{args.prefix}.xlsx", index=False)
     # do some summary stats
     logger.info(f"analyze finished to with stamp {result_stamp}")
 

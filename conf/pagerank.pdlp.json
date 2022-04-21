@@ -1,0 +1,35 @@
+{
+  "directory": "data/pagerank",
+  "methods": [
+    {
+      "name": "pdhg_restart_scaling",
+      "solution_dir": "pdhg_restart_scaling/",
+      "funcname": "pdlp_julia",
+      "affix": ".json"
+    },
+    {
+      "name": "pdhg_baseline",
+      "solution_dir": "pdhg_baseline/",
+      "funcname": "pdlp_julia",
+      "affix": "summary.json"
+    },
+    {
+      "name": "pdhg_restart",
+      "solution_dir": "pdhg_restart/",
+      "funcname": "pdlp_julia",
+      "affix": "summary.json"
+    },
+    {
+      "name": "pdhg_all",
+      "solution_dir": "pdhg_all/",
+      "funcname": "pdlp_julia",
+      "affix": "summary.json"
+    },
+    {
+      "name": "pdhg_scaling",
+      "solution_dir": "pdhg_scaling/",
+      "funcname": "pdlp_julia",
+      "affix": "summary.json"
+    }
+  ]
+}
