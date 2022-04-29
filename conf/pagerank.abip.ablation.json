@@ -1,0 +1,36 @@
+
+{
+  "directory": "data/pagerank",
+  "methods": [
+    {
+      "name": "pc_ruiz_aggressive",
+      "solution_dir": "params_pc_ruiz_aggressive_1e-4",
+      "funcname": "abip",
+      "affix": ".json"
+    },
+    {
+      "name": "pc_ruiz_original",
+      "solution_dir": "params_pc_ruiz_original_1e-4",
+      "funcname": "abip",
+      "affix": ".json"
+    },
+    {
+      "name": "pc_ruiz_original_high",
+      "solution_dir": "params_pc_ruiz_original_1e-6",
+      "funcname": "abip",
+      "affix": ".json"
+    },
+    {
+      "name": "qp_original_high",
+      "solution_dir": "params_qp_original_1e-6",
+      "funcname": "abip",
+      "affix": ".json"
+    },
+    {
+      "name": "qp_aggressive",
+      "solution_dir": "params_qp_aggressive_1e-4",
+      "funcname": "abip",
+      "affix": ".json"
+    }
+  ]
+}

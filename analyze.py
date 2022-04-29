@@ -20,7 +20,6 @@ ANALYZE_METHOD_REGISTRY = {
     "gurobi_simplex": gurobi_string_to_result,
     "gurobi_dual": gurobi_string_to_result,
     "gurobi_barrier": gurobi_string_to_result,
-    "pdlp_julia": google_pdhg_string_to_result,
     "google_pdhg_1e-6": google_pdhg_string_to_result,
     "google_pdhg_1e-4": google_pdhg_string_to_result,
     "google_pdhg_1e-8": google_pdhg_string_to_result,
@@ -33,6 +32,9 @@ ANALYZE_METHOD_REGISTRY = {
     "abip_direct_1e-6": abip_string_to_result,
     "abip_indirect_1e-6": abip_string_to_result,
     "copt_barrier": copt_string_to_result,
+    ###########################
+    "pdlp_julia": google_pdhg_string_to_result,
+    "abip": abip_string_to_result
     ###########################
     # precision not achievable
     ###########################
