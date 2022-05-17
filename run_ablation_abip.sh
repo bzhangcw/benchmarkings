@@ -36,7 +36,7 @@ timelimit=$3
 abip_func_params=$4
 precision=$5
 
-abipname=$set/${abip_func_params}_1e-$precision
+abipname=$set/${abipfunc}_${abip_func_params}_1e-$precision
 logfile=${abipname}.$prefix.1e-$precision.log
 
 mkdir -p $abipname
