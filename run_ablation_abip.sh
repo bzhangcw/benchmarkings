@@ -4,11 +4,11 @@
 #  *
 #  * Copyright (c) 2022
 #  */
-
 if [ "$#" -ne 5 ]; then
   echo "Script for running ABIP via matlab in batch mode...";
   echo "  will run abip by environment variable 'abipsrc'";
-  echo "Usage: <dataset directory> <subset name> <time limit for each instance> <abip_func.mat> <eps>" 1>&2
+  echo "Usage: export abipsrc=abiplp; export abipfunc=abip_indirect; export testfunc=test_one_abip_from_mat; export abipaffix=.mat"
+  echo "Usage:  <dataset directory> <subset name> <time limit for each instance> <abip_func.mat> <eps>" 1>&2
   exit -1
 fi
 
@@ -53,12 +53,12 @@ echo $logfile
 
 cd $wdir/$abipsrc
 
-for f in $(/bin/ls $set/$prefix/*.mps.gz); do
+for f in $(/bin/ls $set/$prefix/*${abipaffix}); do
   ff=$(basename -s .mps.gz $f)
   echo "---------------------------------------------------------------------------------------------\n"
   echo $ff >>$logfile
   echo "running $ff" &>>$logfile;
-  mat_cmd="load('$abip_func_params.mat'); params.func='abip_indirect_0506'; params.timelimit=${timelimit}; test_one_abip('$f', '$abipname', params, 1e-$precision); exit;"
+  mat_cmd="load('$abip_func_params.mat'); params.func='${abipfunc}'; params.timelimit=${timelimit}; ${testfunc}('$f', '$abipname', params, 1e-$precision); exit;"
   echo $mat_cmd &>>$logfile
   full_cmd="nohup timeout $timelimit $MATLAB_HOME/bin/matlab -nodesktop -nodisplay -nosplash -noFigureWindows -r  \"${mat_cmd}\""
   echo $full_cmd
