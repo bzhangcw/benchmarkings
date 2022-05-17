@@ -1,18 +1,12 @@
 
 {
-  "directory": "data/pagerank/sspagerank",
+  "directory": "data/pagerank/",
   "methods": [
     {
       "name": "google_pdhg",
       "solution_dir": "pdhg_sol_1e-6",
       "affix": "summary.json",
       "funcname": "pdlp_julia"
-    },
-    {
-      "name": "qp_hyborg_restart",
-      "solution_dir": "qp_hyborg_restart_1e-6",
-      "funcname": "abip",
-      "affix": ".json"
     },
     {
       "name": "pc_hyborg_restart",
@@ -23,12 +17,6 @@
     {
       "name": "or_hyborg_restart",
       "solution_dir": "or_hyborg_restart_1e-6",
-      "funcname": "abip",
-      "affix": ".json"
-    },
-    {
-      "name": "qp_hybloqo_restart",
-      "solution_dir": "qp_hybloqo_restart_1e-6",
       "funcname": "abip",
       "affix": ".json"
     },

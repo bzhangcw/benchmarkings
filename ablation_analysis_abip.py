@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import sys
 
-key ='pc_ruiz_original'
+key ='google_pdhg'
 fname = sys.argv[1]
 
 df = pd.read_excel(fname)
@@ -25,10 +25,12 @@ def cal_dev(row, k):
         return np.nan
 
 
-df['more_iter'] = df.apply(lambda row: cal_dev(row, 'iteration_num'), axis=1)
-df['more_time'] = df.apply(lambda row: cal_dev(row, 'sol_time'), axis=1)
-df['more_time_perc'] = df.apply(lambda row: cal_dev_perc(row, 'sol_time'), axis=1)
-df['more_iter_perc'] = df.apply(lambda row: cal_dev_perc(row, 'iteration_num'), axis=1)
+df['more_iter'] = pd.to_numeric(df.apply(lambda row: cal_dev(row, 'iteration_num'), axis=1), errors='coerce')
+df['more_time'] = pd.to_numeric(df.apply(lambda row: cal_dev(row, 'sol_time'), axis=1), errors='coerce')
+df['std_time'] = df.apply(lambda row: df_std['sol_time'].get(row.name[0]), axis=1)
+df['std_iter'] = df.apply(lambda row: df_std['iteration_num'].get(row.name[0]), axis=1)
+df['more_iter_perc'] = pd.to_numeric(df['more_iter']/df['iteration_num'], errors='coerce')
+df['more_time_perc'] = pd.to_numeric(df['more_time']/df['sol_time'], errors='coerce')
 dfa = df.groupby(level=1).aggregate(
     {
         "more_iter": 'mean',
@@ -37,6 +39,7 @@ dfa = df.groupby(level=1).aggregate(
         "more_time_perc": 'mean'
     }
 )
+
 print(df.to_latex(longtable=True, multirow=True, multicolumn=True))
 print(dfa.to_latex(longtable=True, multirow=True, multicolumn=True))
 df.to_excel("1.xlsx")

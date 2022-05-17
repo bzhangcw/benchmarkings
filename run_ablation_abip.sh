@@ -58,7 +58,7 @@ for f in $(/bin/ls $set/$prefix/*.mps.gz); do
   echo "---------------------------------------------------------------------------------------------\n"
   echo $ff >>$logfile
   echo "running $ff" &>>$logfile;
-  mat_cmd="load('$abip_func_params.mat'); test_one_abip('$f', '$abipname', params, 1e-$precision); exit;"
+  mat_cmd="load('$abip_func_params.mat'); params.func='abip_indirect_0506'; params.timelimit=${timelimit}; test_one_abip('$f', '$abipname', params, 1e-$precision); exit;"
   echo $mat_cmd &>>$logfile
   full_cmd="nohup timeout $timelimit $MATLAB_HOME/bin/matlab -nodesktop -nodisplay -nosplash -noFigureWindows -r  \"${mat_cmd}\""
   echo $full_cmd
