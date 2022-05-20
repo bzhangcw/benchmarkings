@@ -62,5 +62,5 @@ for f in $(/bin/ls $set/$prefix/*${abipaffix}); do
   echo $mat_cmd &>>$logfile
   full_cmd="nohup timeout $timelimit $MATLAB_HOME/bin/matlab -nodesktop -nodisplay -nosplash -noFigureWindows -r  \"${mat_cmd}\""
   echo $full_cmd
-  eval ${full_cmd} &>>$logfile
+  eval ${full_cmd} > $logfile </dev/null 
 done

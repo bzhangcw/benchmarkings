@@ -80,7 +80,7 @@ def analyze(fpath=DEFAULT_CONF):
             df = pd.DataFrame.from_records(results).assign(
                 method=name,
                 name=lambda df: df['name'].apply(
-                    lambda x: x.replace('.mps', '').replace('.gz', '')
+                    lambda x: x.replace('.mps', '').replace('.gz', '').replace('.mat', '')
                 )
             ).drop_duplicates(subset=['name', 'method'])
             dfs.append(df)

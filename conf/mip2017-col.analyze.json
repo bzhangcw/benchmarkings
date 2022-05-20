@@ -1,5 +1,5 @@
 {
-  "directory": "data/miplib2017-collection",
+  "directory": "data/miplib2017col",
   "methods": [
     {
       "name": "gurobi_simplex",
@@ -22,9 +22,28 @@
       "affix": "summary.json"
     },
     {
-      "name": "google_pdhg_1e-6",
+      "name": "google_pdhg",
       "solution_dir": "pdhg_sol_1e-6",
-      "affix": "summary.json"
+      "affix": "summary.json",
+      "funcname": "pdlp_julia"
+    },
+    {
+      "name": "abip_direct_pc_hyborg_restart",
+      "solution_dir": "abip_direct_pc_hyborg_restart_1e-4",
+      "funcname": "abip",
+      "affix": ".json"
+    },
+    {
+      "name": "abip_direct_pc_hybloqo_restart",
+      "solution_dir": "abip_direct_pc_hybloqo_restart_1e-4",
+      "funcname": "abip",
+      "affix": ".json"
+    },
+    {
+      "name": "abip_direct",
+      "solution_dir": "abip_direct_or_org_norestart_1e-4",
+      "funcname": "abip",
+      "affix": ".json"
     }
   ]
 }
