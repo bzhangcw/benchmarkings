@@ -11,7 +11,8 @@ status = {
     'unfinished': 'failed',
     'dual_infeasible': 'dual_inf',
     'primal_infeasible': 'prim_inf',
-    'solved': 'optimal'
+    'solved': 'optimal',
+    'solved/inaccurate': 'optimal*'
 }
 
 pd.set_option("display.max_columns", None)
@@ -32,7 +33,7 @@ def bool_success(row):
 
 
 df = pd.read_excel(fname)
-df['sol_status'] = df['sol_status'].apply(str.lower).apply(status.get)
+df['sol_status'] = df['sol_status'].apply(str.lower).apply(lambda x: status.get(x, x))
 
 df.set_index(['name', 'method'], inplace=True)
 df_std = df.query(f"method == \'{key}\'")
