@@ -18,6 +18,7 @@ status = {
 pd.set_option("display.max_columns", None)
 key = 'copt_barrier'
 fname = sys.argv[1]
+fname_noaffix = fname.split('.')[0]
 
 
 def bool_success(row):
@@ -98,5 +99,5 @@ dfc = pd.DataFrame.from_dict(
 df_final = pd.concat([dfc, df['sol_time'].unstack(level=1)], sort=False)
 print(df_final.to_latex(longtable=True, multirow=True, multicolumn=True))
 print(dfa.to_latex(longtable=True, multirow=True, multicolumn=True))
-df_final.to_excel("1.xlsx")
-dfa.to_excel("2.xlsx")
+df_final.to_excel(f"{fname_noaffix}.analysis.xlsx")
+dfa.to_excel(f"{fname_noaffix}.analysis-sum.xlsx")
